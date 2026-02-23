@@ -112,6 +112,8 @@ data/
 | `mobilefacenet_model_best.pth.tar` | 面部关键点检测器 | 基于 MobileFaceNet，提取局部关键点特征 |
 
 **重要**：MobileFaceNet 在训练过程中参数被冻结（`requires_grad=False`），仅作为特征提取器使用。
+ir50.pth不在仓库中，请下载后放置于Jittor_POSTER/models/pretrain/ 下。
+下载链接: (https://pan.baidu.com/s/1zoI59qLV93kX2uZrIwdrRA?pwd=ir50) 提取码: ir50
 
 ## 📚 使用指南
 
