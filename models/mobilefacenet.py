@@ -20,7 +20,6 @@ Sequential = nn.Sequential
 
 
 ##################################  Original Arcface Model #############################################################
-######## ccc#######################
 class Flatten(Module):
     def execute(self, input):
         return input.view(input.shape[0], -1)
@@ -174,22 +173,3 @@ class MobileFaceNet(Module):
         conv_features = self.conv_6_sep(out)
         out = self.output_layer(conv_features)
         return out3, out4, conv_features
-
-
-# model = MobileFaceNet([112, 112],136)
-# input = torch.ones(8,3,112,112).cuda()
-# model = model.cuda()
-# x = model(input)
-# import numpy as np
-# parameters = model.parameters()
-# parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
-# print('Total Parameters: %.3fM' % parameters)
-#
-#
-# from ptflops import get_model_complexity_info
-# macs, params = get_model_complexity_info(model, (3, 112, 112), as_strings=True,
-#                                        print_per_layer_stat=True, verbose=True)
-# print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
-# print('{:<30}  {:<8}'.format('Number of parameters: ', params))
-#
-# print(x.shape)
