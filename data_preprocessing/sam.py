@@ -14,7 +14,6 @@ class SAM:
         return p.opt_grad(self.base_optimizer)
 
     def first_step(self, loss):
-        # compute gradients via jittor backward
         self.base_optimizer.backward(loss)
         grad_norm = self._grad_norm()
         scale = self.rho / (grad_norm + 1e-12)
@@ -28,15 +27,12 @@ class SAM:
                 p.assign(p.detach() + e_w)
 
     def second_step(self, loss):
-        # compute gradients at perturbed point
         self.base_optimizer.backward(loss)
-        # restore original weights
         for group in self.param_groups:
             for p in group["params"]:
                 if id(p) in self._old_params:
                     p.assign(self._old_params[id(p)])
         self._old_params.clear()
-        # actual parameter update
         self.base_optimizer.step()
 
     def zero_grad(self):
