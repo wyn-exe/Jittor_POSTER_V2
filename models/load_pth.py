@@ -1,8 +1,3 @@
-"""
-Load PyTorch .pth / .pth.tar checkpoints without requiring torch.
-Supports both the new zip-based format and the old legacy format.
-Returns a dict with numpy arrays instead of torch.Tensors.
-"""
 import pickle
 import io
 import struct
@@ -105,8 +100,6 @@ def _load_legacy(path):
 
     storages_ref = {}
 
-    # In legacy format, _rebuild_tensor is called during pickle parsing
-    # before storage data is read. Return a lazy placeholder instead.
     class _LazyTensor:
         def __init__(self, storage, offset, shape, stride):
             self.storage = storage
@@ -150,7 +143,6 @@ def _load_legacy(path):
     storage_keys = _Unpickler(remaining).load()
     pos_after_keys = pos_after_main + remaining.tell()
 
-    # Now read the raw storage data
     raw_pos = pos_after_keys
     for key in storage_keys:
         size = struct.unpack_from('<q', content, raw_pos)[0]
@@ -163,7 +155,6 @@ def _load_legacy(path):
         else:
             raw_pos += size * 4  # fallback float32
 
-    # Resolve lazy tensors now that storage data is populated
     def _resolve_legacy(obj):
         if isinstance(obj, _LazyTensor):
             return _rebuild_tensor(obj.storage, obj.offset, obj.shape, obj.stride, False)
@@ -187,3 +178,4 @@ def load_pth(path):
         return _load_zip(path)
     else:
         return _load_legacy(path)
+
