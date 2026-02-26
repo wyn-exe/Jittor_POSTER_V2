@@ -37,10 +37,6 @@ class window(nn.Module):
         return x_windows, shortcut
 
 class WindowAttentionGlobal(nn.Module):
-    """
-    Global window attention based on: "Hatamizadeh et al.,
-    Global Context Vision Transformers <https://arxiv.org/abs/2206.09959>"
-    """
 
     def __init__(self,
                  dim,
@@ -279,4 +275,5 @@ class pyramid_trans_expr2(nn.Module):
 
         out = self.VIT(o)
         return out
+
 
