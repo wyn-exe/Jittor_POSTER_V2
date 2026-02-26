@@ -7,16 +7,12 @@ plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
 
 
-# -*- coding:utf-8 -*-
 
 def plot_confusion_matrix(cm, classes,
                           normalize=False,
                           title='Confusion matrix',
                           cmap=plt.cm.Blues):
-    """
-    This function prints and plots the confusion matrix.
-    Normalization can be applied by setting `normalize=True`.
-    """
+
     if normalize:
         cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
         print("Normalized confusion matrix")
@@ -60,3 +56,4 @@ class_names = ["SU", 'FE', 'AN', 'HA', 'SA', 'DI', 'NE']
 plt.figure(dpi=200)
 plot_confusion_matrix(cnf_matrix, classes=class_names, normalize=True,
                       title=None)
+
