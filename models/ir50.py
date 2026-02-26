@@ -229,38 +229,3 @@ def load_pretrained_weights(model, checkpoint):
     model.load_state_dict(model_dict)
     print('load_weight', len(matched_layers))
     return model
-
-# model = Backbone(50, 0.0, 'ir')
-# ir_checkpoint = torch.load(r'C:\Users\86187\Desktop\project\mixfacial\models\pretrain\new_ir50.pth')
-# print('hello')
-# i1, i2, i3 = 0, 0, 0
-# ir_checkpoint = torch.load(r'C:\Users\86187\Desktop\project\mixfacial\models\pretrain\ir50.pth', map_location=lambda storage, loc: storage)
-# for (k1, v1), (k2, v2) in zip(model.state_dict().items(), ir_checkpoint.items()):
-#     print(f'k1:{k1}, k2:{k2}')
-#     model.state_dict()[k1] = v2
-
-# torch.save(model.state_dict(), r'C:\Users\86187\Desktop\project\mixfacial\models\pretrain\new_ir50.pth')
-#     print(k)
-#     if k.startswith('body1'):
-#         i1+=1
-#     if k.startswith('body2'):
-#         i2+=1
-#     if k.startswith('body3'):
-#         i3+=1
-# print(f'i1:{i1}, i2:{i2}, i3:{i3}')
-
-# print('-'*100)
-# ir_checkpoint = torch.load(r'C:\Users\86187\Desktop\project\mixfacial\models\pretrain\ir50.pth', map_location=lambda storage, loc: storage)
-# le = 0
-# for k, v in ir_checkpoint.items():
-#     # print(k)
-#     if k.startswith('body'):
-#         if le < i1:
-#             le += 1
-#             key = k.split('.')[0] + str(1) + k.split('.')[1:]
-#             print(key)
-# # ir_checkpoint = ir_checkpoint["model"]
-# model = load_pretrained_weights(model, ir_checkpoint)
-# img = torch.rand(size=(2,3,224,224))
-# out1, out2, out3 = model(img)
-# print(out1.shape, out2.shape, out3.shape)
