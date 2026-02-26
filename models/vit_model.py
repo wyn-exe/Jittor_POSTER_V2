@@ -10,7 +10,6 @@ import math
 
 
 def trunc_normal_(tensor, mean=0., std=1., a=-2., b=2.):
-    """Truncated normal distribution initialization"""
     def norm_cdf(x):
         return (1.0 + jt.erf(x / jt.sqrt(jt.array(2.0)))) / 2.0
 
@@ -27,9 +26,6 @@ def to_2tuple(x):
 
 
 def drop_path(x, drop_prob: float = 0., training: bool = False):
-    """
-    Drop paths (Stochastic Depth) per sample (when applied in main path of residual blocks).
-    """
     if drop_prob == 0. or not training:
         return x
     keep_prob = 1 - drop_prob
@@ -84,9 +80,6 @@ class BasicBlock(nn.Module):
 
 
 class DropPath(nn.Module):
-    """
-    Drop paths (Stochastic Depth) per sample  (when applied in main path of residual blocks).
-    """
 
     def __init__(self, drop_prob=None):
         super(DropPath, self).__init__()
